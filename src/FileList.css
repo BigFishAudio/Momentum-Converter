@@ -1,0 +1,29 @@
+.FileList {
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+}
+
+.FileList .ExportButton {
+    position: fixed;
+    bottom: 2em;
+    right: 2em;
+}
+
+.FileList .ConvertButton {
+    position: fixed;
+    bottom: 2em;
+    right: 17em;
+}
+
+.FileList .ellipsisleft {
+    /* Standard CSS ellipsis */
+    white-space: nowrap;                   
+    overflow: hidden;
+    text-overflow: ellipsis;  
+    width: 200px;
+    
+    /* Beginning of string */
+    direction: rtl;
+    text-align: left;
+  }

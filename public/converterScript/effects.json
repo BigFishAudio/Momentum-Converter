@@ -1,0 +1,1423 @@
+{
+  "effects": [
+    {
+      "name": "Compressor",
+      "ix": 0,
+      "enabled": {
+        "master": false,
+        "slices": false,
+        "channels": true
+      },
+      "parameters": [
+        {
+          "name": "Bypass",
+          "default": "Off"
+        },
+        {
+          "name": "Threshold",
+          "min": -60,
+          "max": 0,
+          "default": -30,
+          "unit": "dB"
+        },
+        {
+          "name": "Soft Knee",
+          "min": 0,
+          "max": 20,
+          "default": 0,
+          "unit": "dB"
+        },
+        {
+          "name": "Ratio",
+          "min": 1,
+          "max": 20,
+          "default": 4,
+          "unit": ": 1"
+        },
+        {
+          "name": "Slam",
+          "default": "Off"
+        },
+        {
+          "name": "Attack",
+          "min": 0.001,
+          "max": 1,
+          "default": 0.6,
+          "unit": "s"
+        },
+        {
+          "name": "Release",
+          "min": 0.01,
+          "max": 10,
+          "default": 0.6,
+          "unit": "s"
+        },
+        {
+          "name": "Output",
+          "min": 0,
+          "max": 20,
+          "default": 8,
+          "unit": "dB"
+        }
+      ]
+    },
+    {
+      "name": "Bus Compressor",
+      "ix": 1,
+      "enabled": {
+        "master": true,
+        "slices": false,
+        "channels": false
+      },
+      "parameters": [
+        {
+          "name": "Bypass",
+          "default": "Off"
+        },
+        {
+          "name": "Threshold",
+          "min": -60,
+          "max": 0,
+          "default": -10,
+          "unit": "dB"
+        },
+        {
+          "name": "Ratio",
+          "min": 1,
+          "max": 20,
+          "default": 2.5,
+          "unit": ": 1"
+        },
+        {
+          "name": "Slam",
+          "default": "Off"
+        },
+        {
+          "name": "Attack",
+          "min": 0.001,
+          "max": 1,
+          "default": 0.2,
+          "unit": "s"
+        },
+        {
+          "name": "Release",
+          "min": 0.01,
+          "max": 10,
+          "default": 1.0,
+          "unit": "s"
+        },
+        {
+          "name": "Output",
+          "min": 0,
+          "max": 20,
+          "default": 0,
+          "unit": "dB"
+        },
+        {
+          "name": "Parallel Mix",
+          "min": 0,
+          "max": 100,
+          "default": 0,
+          "unit": "%"
+        }
+      ]
+    },
+    {
+      "name": "Convolution",
+      "ix": 2,
+      "enabled": {
+        "master": false,
+        "slices": false,
+        "channels": false
+      },
+      "parameters": [
+        {
+          "name": "Bypass",
+          "default": "Off"
+        },
+        {
+          "name": "Quality",
+          "min": 2,
+          "max": 20,
+          "default": 20,
+          "unit": "kHz"
+        },
+        {
+          "name": "Input Width",
+          "min": 0,
+          "max": 100,
+          "default": 100,
+          "unit": "%"
+        },
+        {
+          "name": "Pre Delay",
+          "min": 0,
+          "max": 200,
+          "default": 0,
+          "unit": "ms"
+        },
+        {
+          "name": "Decay",
+          "min": -100,
+          "max": 18,
+          "default": -40.882,
+          "unit": "dB/sec"
+        },
+        {
+          "name": "Dry",
+          "min": -100,
+          "max": 0,
+          "default": 0,
+          "unit": "dB"
+        },
+        {
+          "name": "Wet",
+          "min": -100,
+          "max": 0,
+          "default": 0,
+          "unit": "dB"
+        },
+        {
+          "name": "Mix",
+          "min": 0,
+          "max": 100,
+          "default": 0,
+          "unit": "%"
+        },
+        {
+          "name": "Impulse",
+          "min": 0,
+          "max": 2,
+          "default": null,
+          "items": [
+            "480L Fat Plate",
+            "White Noise 16 kHz",
+            "White Noise"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Distortion",
+      "ix": 3,
+      "enabled": {
+        "master": true,
+        "slices": true,
+        "channels": true
+      },
+      "parameters": [
+        {
+          "name": "Bypass",
+          "default": "Off"
+        },
+        {
+          "name": "Drive",
+          "min": 0,
+          "max": 60,
+          "default": 0,
+          "unit": "dB",
+          "centerline": 0,
+          "modulation": 80
+        },
+        {
+          "name": "Rectify",
+          "min": 0,
+          "max": 100,
+          "default": 0,
+          "unit": "%"
+        },
+        {
+          "name": "Mode",
+          "min": 0,
+          "max": 2,
+          "default": 0,
+          "items": [
+            "Transistor *",
+            "Tube",
+            "Curve"
+          ]
+        },
+        {
+          "name": "Low Cut",
+          "min": 20,
+          "max": 1000,
+          "default": 20,
+          "unit": "Hz"
+        },
+        {
+          "name": "High Cut",
+          "min": 1,
+          "max": 25,
+          "default": 25,
+          "unit": "kHz"
+        },
+        {
+          "name": "Wet",
+          "min": -100,
+          "max": 0,
+          "default": -9,
+          "unit": "dB"
+        },
+        {
+          "name": "Dry",
+          "min": -100,
+          "max": 0,
+          "default": -9,
+          "unit": "dB"
+        },
+        {
+          "name": "Mix",
+          "min": 0,
+          "max": 100,
+          "default": 50,
+          "unit": "%",
+          "centerline": 0,
+          "modulation": 50
+        }
+      ]
+    },
+    {
+      "name": "EQ",
+      "ix": 4,
+      "enabled": {
+        "master": true,
+        "slices": false,
+        "channels": true
+      },
+      "parameters": [
+        {
+          "name": "Bypass",
+          "default": "Off"
+        },
+        {
+          "name": "Low Gain",
+          "min": -20,
+          "max": 20,
+          "default": 0,
+          "unit": "dB"
+        },
+        {
+          "name": "Low Freq",
+          "min": 50,
+          "max": 800,
+          "default": 160,
+          "unit": "Hz"
+        },
+        {
+          "name": "Low Contour",
+          "min": 0,
+          "max": 100,
+          "default": 0,
+          "unit": "%"
+        },
+        {
+          "name": "Mid 1 Gain",
+          "min": -20,
+          "max": 20,
+          "default": 0,
+          "unit": "dB"
+        },
+        {
+          "name": "Mid 1 Freq",
+          "min": 40,
+          "max": 16000,
+          "default": 800,
+          "unit": "Hz"
+        },
+        {
+          "name": "Mid 1 Width",
+          "min": 0.333,
+          "max": 3,
+          "default": 1.6664999999999999,
+          "unit": "oct"
+        },
+        {
+          "name": "Mid 2 Gain",
+          "min": -20,
+          "max": 20,
+          "default": 0,
+          "unit": "dB"
+        },
+        {
+          "name": "Mid 2 Freq",
+          "min": 40,
+          "max": 16000,
+          "default": 3000,
+          "unit": "Hz"
+        },
+        {
+          "name": "Mid 2 Width",
+          "min": 0.333,
+          "max": 3,
+          "default": 2.1737634,
+          "unit": "oct"
+        },
+        {
+          "name": "High Gain",
+          "min": -20,
+          "max": 20,
+          "default": 0,
+          "unit": "dB"
+        },
+        {
+          "name": "High Freq",
+          "min": 1,
+          "max": 16,
+          "default": 8,
+          "unit": "kHz"
+        },
+        {
+          "name": "High Contour",
+          "min": 0,
+          "max": 100,
+          "default": 0,
+          "unit": "%"
+        },
+        {
+          "name": "Output",
+          "min": -20,
+          "max": 20,
+          "default": 0,
+          "unit": "dB"
+        }
+      ]
+    },
+    {
+      "name": "Filter",
+      "ix": 5,
+      "enabled": {
+        "master": true,
+        "slices": true,
+        "channels": true
+      },
+      "parameters": [
+        {
+          "name": "Bypass",
+          "default": "Off"
+        },
+        {
+          "name": "Mode",
+          "min": 0,
+          "max": 7,
+          "default": 0,
+          "items": [
+            "LP12 *",
+            "LP24",
+            "LP+",
+            "BP6",
+            "HP12",
+            "HP+",
+            "Comb+",
+            "Comb-"
+          ]
+        },
+        {
+          "name": "Cutoff",
+          "min": 20,
+          "max": 25000,
+          "default": 25000,
+          "unit": "Hz",
+          "centerline": 20,
+          "modulation": 75
+        },
+        {
+          "name": "Resonance",
+          "min": 0,
+          "max": 100,
+          "default": 0,
+          "unit": "%",
+          "centerline": 0,
+          "modulation": 50
+        }
+      ]
+    },
+    {
+      "name": "Guitar Amp",
+      "ix": 6,
+      "enabled": {
+        "master": false,
+        "slices": false,
+        "channels": true
+      },
+      "parameters": [
+        {
+          "name": "Bypass",
+          "default": "Off"
+        },
+        {
+          "name": "Model",
+          "min": 0,
+          "max": 3,
+          "default": 0,
+          "items": [
+            "Fender *",
+            "Vox",
+            "Marshall",
+            "Marshall Hot"
+          ]
+        },
+        {
+          "name": "Gain",
+          "min": 0,
+          "max": 100,
+          "default": 50,
+          "unit": "%"
+        },
+        {
+          "name": "Bass",
+          "min": 0,
+          "max": 100,
+          "default": 50,
+          "unit": "%"
+        },
+        {
+          "name": "Mid",
+          "min": 0,
+          "max": 100,
+          "default": 50,
+          "unit": "%"
+        },
+        {
+          "name": "Treble",
+          "min": 0,
+          "max": 100,
+          "default": 50,
+          "unit": "%"
+        },
+        {
+          "name": "Volume",
+          "min": 1,
+          "max": 100,
+          "default": 50,
+          "unit": "%"
+        },
+        {
+          "name": "Output",
+          "min": -100,
+          "max": 12,
+          "default": 0,
+          "unit": "dB"
+        }
+      ]
+    },
+    {
+      "name": "Limiter",
+      "ix": 7,
+      "enabled": {
+        "master": true,
+        "slices": true,
+        "channels": true
+      },
+      "parameters": [
+        {
+          "name": "Bypass",
+          "default": "Off"
+        },
+        {
+          "name": "Release",
+          "min": 0.1,
+          "max": 5,
+          "default": 0.6,
+          "unit": "s"
+        },
+        {
+          "name": "Mode",
+          "min": 0,
+          "max": 2,
+          "default": 0,
+          "items": [
+            "Soft *",
+            "Hard",
+            "Clip"
+          ]
+        },
+        {
+          "name": "Drive",
+          "min": 0,
+          "max": 60,
+          "default": 0,
+          "unit": "dB",
+          "centerline": 0,
+          "modulation": 50
+        }
+      ]
+    },
+    {
+      "name": "Sub Bass",
+      "ix": 8,
+      "enabled": {
+        "master": false,
+        "slices": true,
+        "channels": true
+      },
+      "parameters": [
+        {
+          "name": "Bypass",
+          "default": "Off"
+        },
+        {
+          "name": "Max Freq",
+          "min": 30,
+          "max": 560,
+          "default": 150,
+          "unit": "Hz"
+        },
+        {
+          "name": "Tone",
+          "min": 0,
+          "max": 100,
+          "default": 40,
+          "unit": "%"
+        },
+        {
+          "name": "Dry",
+          "min": -100,
+          "max": 0,
+          "default": -3,
+          "unit": "dB"
+        },
+        {
+          "name": "Wet",
+          "min": -100,
+          "max": 0,
+          "default": -3,
+          "unit": "dB"
+        },
+        {
+          "name": "Mix",
+          "min": 0,
+          "max": 100,
+          "default": 0,
+          "unit": "%",
+          "centerline": 0,
+          "modulation": 50
+        }
+      ]
+    },
+    {
+      "name": "Transient",
+      "ix": 9,
+      "enabled": {
+        "master": false,
+        "slices": true,
+        "channels": true
+      },
+      "parameters": [
+        {
+          "name": "Bypass",
+          "default": "Off"
+        },
+        {
+          "name": "Attack",
+          "min": -15,
+          "max": 15,
+          "default": 0,
+          "unit": "dB",
+          "centerline": 0,
+          "modulation": 50
+        },
+        {
+          "name": "Hold",
+          "min": 0,
+          "max": 100,
+          "default": 50,
+          "unit": "%",
+          "centerline": 0,
+          "modulation": 75
+        }
+      ]
+    },
+    {
+      "name": "Tremolo/Pan",
+      "ix": 10,
+      "enabled": {
+        "master": false,
+        "slices": false,
+        "channels": true
+      },
+      "parameters": [
+        {
+          "name": "Bypass",
+          "default": "Off"
+        },
+        {
+          "name": "Sync",
+          "min": 0,
+          "max": 1,
+          "default": 0,
+          "items": [
+            "Hz *",
+            "per beat"
+          ]
+        },
+        {
+          "name": "Rate",
+          "min": 0.05,
+          "max": 20,
+          "default": 10,
+          "centerline": 0.05,
+          "modulation": 50
+        },
+        {
+          "name": "Depth",
+          "min": 0,
+          "max": 100,
+          "default": 100,
+          "unit": "%",
+          "centerline": 100,
+          "modulation": 50
+        },
+        {
+          "name": "Spread",
+          "min": 0,
+          "max": 360,
+          "default": 0,
+          "unit": "deg"
+        }
+      ]
+    },
+    {
+      "name": "Chorus",
+      "ix": 11,
+      "enabled": {
+        "master": false,
+        "slices": true,
+        "channels": true
+      },
+      "parameters": [
+        {
+          "name": "Bypass",
+          "default": "Off"
+        },
+        {
+          "name": "Rate",
+          "min": 0.1,
+          "max": 10,
+          "default": 1.5,
+          "unit": "Hz",
+          "centerline": 0.1,
+          "modulation": 70
+        },
+        {
+          "name": "Depth",
+          "min": 0,
+          "max": 32,
+          "default": 2.5,
+          "unit": "ms",
+          "centerline": 0,
+          "modulation": 60
+        },
+        {
+          "name": "Damping",
+          "min": 1,
+          "max": 25,
+          "default": 25,
+          "unit": "kHz"
+        },
+        {
+          "name": "Delay",
+          "min": 0,
+          "max": 32,
+          "default": 16,
+          "unit": "ms"
+        },
+        {
+          "name": "Voices",
+          "min": 1,
+          "max": 4,
+          "default": 2
+        },
+        {
+          "name": "Dry",
+          "min": -100,
+          "max": 0,
+          "default": -3,
+          "unit": "dB"
+        },
+        {
+          "name": "Wet",
+          "min": -100,
+          "max": 0,
+          "default": -3,
+          "unit": "dB"
+        },
+        {
+          "name": "Modulation",
+          "min": 0,
+          "max": 1,
+          "default": 1,
+          "items": [
+            "Square *",
+            "Sine"
+          ]
+        },
+        {
+          "name": "Mix",
+          "min": 0,
+          "max": 100,
+          "default": 0,
+          "unit": "%",
+          "centerline": 0,
+          "modulation": 50
+        }
+      ]
+    },
+    {
+      "name": "Delay",
+      "ix": 12,
+      "enabled": {
+        "master": false,
+        "slices": true,
+        "channels": true
+      },
+      "parameters": [
+        {
+          "name": "Bypass",
+          "default": "Off"
+        },
+        {
+          "name": "Time",
+          "min": 0,
+          "max": 4,
+          "default": 0,
+          "unit": "s",
+          "centerline": 0,
+          "modulation": 65
+        },
+        {
+          "name": "Ratio",
+          "min": -50,
+          "max": 50,
+          "default": 0
+        },
+        {
+          "name": "Sync",
+          "min": 0,
+          "max": 1,
+          "default": 0,
+          "items": [
+            "sec *",
+            "beats"
+          ]
+        },
+        {
+          "name": "Feedback",
+          "min": 0,
+          "max": 100,
+          "default": 50,
+          "unit": "%",
+          "centerline": 0,
+          "modulation": 75
+        },
+        {
+          "name": "Feedback Mode",
+          "min": 0,
+          "max": 4,
+          "default": 0,
+          "items": [
+            "Stereo *",
+            "Cross",
+            "Left",
+            "Right",
+            "Ping Pong"
+          ]
+        },
+        {
+          "name": "Dry",
+          "min": -100,
+          "max": 0,
+          "default": -3,
+          "unit": "dB"
+        },
+        {
+          "name": "Wet",
+          "min": -100,
+          "max": 0,
+          "default": -3,
+          "unit": "dB"
+        },
+        {
+          "name": "Damping",
+          "min": 1,
+          "max": 20,
+          "default": 20,
+          "unit": "kHz"
+        },
+        {
+          "name": "Mix",
+          "min": 0,
+          "max": 100,
+          "default": 0,
+          "unit": "%",
+          "centerline": 0,
+          "modulation": 50
+        }
+      ]
+    },
+    {
+      "name": "Flanger",
+      "ix": 13,
+      "enabled": {
+        "master": true,
+        "slices": true,
+        "channels": true
+      },
+      "parameters": [
+        {
+          "name": "Bypass",
+          "default": "Off"
+        },
+        {
+          "name": "Rate",
+          "min": 0.1,
+          "max": 10,
+          "default": 2,
+          "unit": "Hz",
+          "centerline": 0.1,
+          "modulation": 60
+        },
+        {
+          "name": "Depth",
+          "min": 0,
+          "max": 12,
+          "default": 3.2,
+          "unit": "ms",
+          "centerline": 0,
+          "modulation": 60
+        },
+        {
+          "name": "Delay",
+          "min": 0,
+          "max": 12,
+          "default": 2,
+          "unit": "ms"
+        },
+        {
+          "name": "Feedback",
+          "min": 0,
+          "max": 100,
+          "default": 60,
+          "unit": "%"
+        },
+        {
+          "name": "Phase",
+          "min": 0,
+          "max": 180,
+          "default": 90,
+          "unit": "deg"
+        },
+        {
+          "name": "Mix",
+          "min": 0,
+          "max": 100,
+          "default": 100,
+          "unit": "%",
+          "centerline": 0,
+          "modulation": 50
+        }
+      ]
+    },
+    {
+      "name": "LoFi",
+      "ix": 14,
+      "enabled": {
+        "master": true,
+        "slices": true,
+        "channels": true
+      },
+      "parameters": [
+        {
+          "name": "Bypass",
+          "default": "Off"
+        },
+        {
+          "name": "Sample Rate",
+          "min": 2,
+          "max": 50,
+          "default": 50,
+          "unit": "kHz",
+          "centerline": 50,
+          "modulation": 25
+        },
+        {
+          "name": "Jitter",
+          "min": 0,
+          "max": 50,
+          "default": 0,
+          "unit": "%"
+        },
+        {
+          "name": "Bit Depth",
+          "min": 2,
+          "max": 16,
+          "default": 16,
+          "centerline": 16,
+          "modulation": 40
+        },
+        {
+          "name": "Bit Bias",
+          "min": 0,
+          "max": 100,
+          "default": 0,
+          "unit": "%"
+        },
+        {
+          "name": "Slew Rate",
+          "min": 0,
+          "max": 100,
+          "default": 100,
+          "unit": "%"
+        },
+        {
+          "name": "Mix",
+          "min": 0,
+          "max": 100,
+          "default": 0,
+          "unit": "%",
+          "centerline": 0,
+          "modulation": 50
+        }
+      ]
+    },
+    {
+      "name": "Non Linear Reverb",
+      "ix": 15,
+      "enabled": {
+        "master": false,
+        "slices": true,
+        "channels": true
+      },
+      "parameters": [
+        {
+          "name": "Bypass",
+          "default": "Off"
+        },
+        {
+          "name": "Time",
+          "min": 0,
+          "max": 500,
+          "default": 180,
+          "unit": "ms",
+          "centerline": 0,
+          "modulation": 65
+        },
+        {
+          "name": "Low Cut",
+          "min": 20,
+          "max": 2000,
+          "default": 385,
+          "unit": "Hz"
+        },
+        {
+          "name": "High Cut",
+          "min": 2,
+          "max": 20,
+          "default": 5,
+          "unit": "kHz"
+        },
+        {
+          "name": "Dry",
+          "min": -100,
+          "max": 0,
+          "default": -3,
+          "unit": "dB"
+        },
+        {
+          "name": "Wet",
+          "min": -100,
+          "max": 0,
+          "default": -3,
+          "unit": "dB"
+        },
+        {
+          "name": "Mix",
+          "min": 0,
+          "max": 100,
+          "default": 0,
+          "unit": "%",
+          "centerline": 0,
+          "modulation": 50
+        }
+      ]
+    },
+    {
+      "name": "Phaser",
+      "ix": 16,
+      "enabled": {
+        "master": true,
+        "slices": true,
+        "channels": true
+      },
+      "parameters": [
+        {
+          "name": "Bypass",
+          "default": "Off"
+        },
+        {
+          "name": "Rate",
+          "min": 0.1,
+          "max": 10,
+          "default": 0.5,
+          "unit": "Hz",
+          "centerline": 0.1,
+          "modulation": 60
+        },
+        {
+          "name": "Depth",
+          "min": 0,
+          "max": 100,
+          "default": 60,
+          "unit": "%",
+          "centerline": 0,
+          "modulation": 80
+        },
+        {
+          "name": "Feedback",
+          "min": 0,
+          "max": 100,
+          "default": 23,
+          "unit": "%"
+        },
+        {
+          "name": "Invert Feedback",
+          "default": "Off"
+        },
+        {
+          "name": "Poles",
+          "min": 0,
+          "max": 3,
+          "default": 3,
+          "items": [
+            "2",
+            "4 *",
+            "6",
+            "8"
+          ]
+        },
+        {
+          "name": "Center",
+          "min": 100,
+          "max": 10000,
+          "default": 2000,
+          "unit": "Hz"
+        },
+        {
+          "name": "Spread",
+          "min": 0,
+          "max": 100,
+          "default": 50,
+          "unit": "%"
+        },
+        {
+          "name": "Mix",
+          "min": 0,
+          "max": 100,
+          "default": 0,
+          "unit": "%",
+          "centerline": 0,
+          "modulation": 50
+        }
+      ]
+    },
+    {
+      "name": "Reverb",
+      "ix": 17,
+      "enabled": {
+        "master": false,
+        "slices": true,
+        "channels": true
+      },
+      "parameters": [
+        {
+          "name": "Bypass",
+          "default": "Off"
+        },
+        {
+          "name": "Time",
+          "min": 0,
+          "max": 100,
+          "default": 30,
+          "unit": "%",
+          "centerline": 0,
+          "modulation": 65
+        },
+        {
+          "name": "Pre Delay",
+          "min": 0,
+          "max": 200,
+          "default": 0,
+          "unit": "ms"
+        },
+        {
+          "name": "Low Cut",
+          "min": 20,
+          "max": 2000,
+          "default": 400,
+          "unit": "Hz"
+        },
+        {
+          "name": "Low Damping",
+          "min": 20,
+          "max": 2000,
+          "default": 700,
+          "unit": "Hz"
+        },
+        {
+          "name": "High Cut",
+          "min": 2,
+          "max": 20,
+          "default": 8,
+          "unit": "kHz"
+        },
+        {
+          "name": "Damping",
+          "min": 2,
+          "max": 20,
+          "default": 9,
+          "unit": "kHz"
+        },
+        {
+          "name": "Dry",
+          "min": -100,
+          "max": 0,
+          "default": -3,
+          "unit": "dB"
+        },
+        {
+          "name": "Wet",
+          "min": -100,
+          "max": 0,
+          "default": -3,
+          "unit": "dB"
+        },
+        {
+          "name": "Mix",
+          "min": 0,
+          "max": 100,
+          "default": 50,
+          "unit": "%"
+        },
+        {
+          "name": "Input Trim",
+          "min": -100,
+          "max": 0,
+          "default": -100,
+          "unit": "dB",
+          "centerline": -101,
+          "modulation": 50
+        }
+      ]
+    },
+    {
+      "name": "Vol/Pan",
+      "ix": 18,
+      "enabled": {
+        "master": false,
+        "slices": true,
+        "channels": false
+      },
+      "parameters": [
+        {
+          "name": "Bypass",
+          "default": "Off"
+        },
+        {
+          "name": "Gain",
+          "min": -100,
+          "max": 12.04,
+          "default": 0,
+          "unit": "dB",
+          "centerline": 0,
+          "modulation": 50
+        },
+        {
+          "name": "Pan",
+          "min": -100,
+          "max": 100,
+          "default": 0,
+          "centerline": 0,
+          "modulation": 50
+        }
+      ]
+    },
+    {
+      "name": "Glide",
+      "ix": 19,
+      "enabled": {
+        "master": false,
+        "slices": true,
+        "channels": false
+      },
+      "parameters": [
+        {
+          "name": "Bypass",
+          "default": "On"
+        },
+        {
+          "name": "Amount",
+          "min": 0,
+          "max": 1,
+          "default": 0.5,
+          "centerline": 0.5,
+          "modulation": 50
+        },
+        {
+          "name": "Speed",
+          "min": 0,
+          "max": 4,
+          "default": 0,
+          "unit": "s",
+          "centerline": 0,
+          "modulation": 75
+        }
+      ]
+    },
+    {
+      "name": "Pitch",
+      "ix": 20,
+      "enabled": {
+        "master": false,
+        "slices": true,
+        "channels": false
+      },
+      "parameters": [
+        {
+          "name": "Bypass",
+          "default": "On"
+        },
+        {
+          "name": "Pitch",
+          "min": 0,
+          "max": 1,
+          "default": 0,
+          "unit": "ct",
+          "centerline": 0.5,
+          "modulation": 50
+        }
+      ]
+    },
+    {
+      "name": "Stutter",
+      "ix": 21,
+      "enabled": {
+        "master": false,
+        "slices": true,
+        "channels": false
+      },
+      "parameters": [
+        {
+          "name": "Bypass",
+          "default": "On"
+        },
+        {
+          "name": "Stutter",
+          "min": 0,
+          "max": 1,
+          "default": 0,
+          "centerline": 0,
+          "modulation": 50
+        }
+      ]
+    },
+    {
+      "name": "Reverse",
+      "ix": 22,
+      "enabled": {
+        "master": false,
+        "slices": true,
+        "channels": false
+      },
+      "parameters": [
+        {
+          "name": "Bypass",
+          "default": "On"
+        },
+        {
+          "name": "Reverse",
+          "min": 0,
+          "max": 1,
+          "default": 0,
+          "centerline": 0,
+          "modulation": 50
+        }
+      ]
+    },
+    {
+      "name": "Gain",
+      "ix": 23,
+      "enabled": {
+        "master": true,
+        "slices": false,
+        "channels": true
+      },
+      "parameters": [
+        {
+          "name": "Bypass",
+          "default": "Off"
+        },
+        {
+          "name": "Gain",
+          "min": -100,
+          "max": 12,
+          "default": 0,
+          "unit": "dB"
+        },
+        {
+          "name": "Invert Phase",
+          "min": 0,
+          "max": 3,
+          "default": 0,
+          "items": [
+            "Off *",
+            "On",
+            "Left Only",
+            "Right Only"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "State Variable Filter",
+      "ix": 24,
+      "enabled": {
+        "master": true,
+        "slices": false,
+        "channels": true
+      },
+      "parameters": [
+        {
+          "name": "Bypass",
+          "default": "Off"
+        },
+        {
+          "name": "Cutoff",
+          "min": 20,
+          "max": 25000,
+          "default": 13734.02,
+          "unit": "Hz"
+        },
+        {
+          "name": "Resonance",
+          "min": 0,
+          "max": 100,
+          "default": 0,
+          "unit": "%"
+        },
+        {
+          "name": "Low/High",
+          "min": -100,
+          "max": 100,
+          "default": -100,
+          "unit": "%"
+        },
+        {
+          "name": "Notch/Peak",
+          "min": 0,
+          "max": 100,
+          "default": 100,
+          "unit": "%"
+        }
+      ]
+    }
+  ]
+}

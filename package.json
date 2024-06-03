@@ -1,0 +1,57 @@
+{
+  "name": "bfa-loop-info",
+  "author": "UJAM Development GmbH (Nils Schikora)",
+  "description": "Extracts information from Apple Loops and converts GED patches.",
+  "version": "0.11.6",
+  "private": true,
+  "main": "public/electron.js",
+  "homepage": "./",
+  "dependencies": {
+    "@fluentui/react": "^7.110.5",
+    "filenamify": "^2.0.0",
+    "fs-extra": "^6.0.1",
+    "mime-types": "^2.1.21",
+    "plist": "^3.0.1",
+    "react": "^16.3.0",
+    "react-dom": "^16.3.0",
+    "react-scripts": "^3.4.1",
+    "username": "^3.0.0",
+    "yargs": "^11.0.0"
+  },
+  "devDependencies": {
+    "electron": "^8.2.5",
+    "electron-builder": "^22.6.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "electron-dev": "BROWSER=none yarn start & ENVIRONMENT=dev electron .",
+    "electron-dev-dbg": "BROWSER=none yarn start & ENVIRONMENT=dev electron --inspect=5858 .",
+    "electron-mac": "ENVIRONMENT=dev electron --inspect=5858 .",
+    "electron-dev-win": "set BROWSER=none&& start /B yarn start&& set ENVIRONMENT=dev&& electron --inspect=5858 .",
+    "preelectron-pack": "yarn build",
+    "electron-pack": "build --em.main=build/electron.js",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
+  },
+  "build": {
+    "appId": "com.bigfishaudio.loopinfo",
+    "files": [
+      "build/**/*",
+      "node_modules/**/*"
+    ],
+    "directories": {
+      "buildResources": "assets"
+    }
+  },
+  "browserslist": {
+    "production": [
+      "last 3 chrome version"
+    ],
+    "development": [
+      "last 3 chrome version"
+    ]
+  }
+}

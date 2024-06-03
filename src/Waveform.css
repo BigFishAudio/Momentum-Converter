@@ -1,0 +1,18 @@
+.Waveform {
+
+}
+
+.WaveformImage {
+    width: 702px;
+    height: 179px;
+    display: block;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-color: rgb(243, 242, 241);
+}
+
+#waveformcanvas {
+    display: none;
+    width: 1000;
+    height: 255;
+}

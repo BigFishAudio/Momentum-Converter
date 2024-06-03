@@ -1,0 +1,280 @@
+pipeline {
+    agent none
+    stages {
+        stage('Create') {
+            parallel {
+                stage('macOS') {
+                    agent {
+                        label 'macOSMojaveBuildSlave'
+                    }
+                    stages {
+                        stage('Checkout') {
+                            steps {
+                                script {
+                                    final scmVars = checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'SubmoduleOption', disableSubmodules: false, recursiveSubmodules: true, reference: '', trackingSubmodules: false]], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'd98040c9-a183-420a-b354-60f7dc5efedd', url: 'git@gitlab.ujam.com:ujam/bfa-loop-info.git']]])
+                                    env.GIT_COMMIT = scmVars.GIT_COMMIT
+                                    env.GIT_PREVIOUS_SUCCESSFUL_COMMIT = scmVars.GIT_PREVIOUS_SUCCESSFUL_COMMIT ? scmVars.GIT_PREVIOUS_SUCCESSFUL_COMMIT : 'HEAD~1'
+                                    changes = sh(returnStdout: true, script: "git log --pretty=format:'%ad %s - %an' --date=format:'%Y-%m-%d %H:%M' ${env.GIT_PREVIOUS_SUCCESSFUL_COMMIT}..HEAD").replaceAll('\n', '\\\\n')
+                                }
+                            }
+                        }
+
+                        stage('Install dependencies') {
+                            steps {
+                                sh 'yarn'
+                            }
+                        }
+
+                        stage('Clean') {
+                            steps {
+                                sh 'rm -rf dist'
+                            }
+                        }
+
+                        stage('Build') {
+                            steps {
+                                sh 'yarn build'
+                            }
+                        }
+
+                        stage('Create installer') {
+                            steps {
+                                script {
+                                    env.CSC_IDENTITY_AUTO_DISCOVERY = false
+                                    env.CSC_NAME = 'UJAM Inc. (HM3V9RZE5F)'
+                                    env.CSC_KEYCHAIN = 'buildslave.keychain'
+                                }
+                                sh 'security -v unlock-keychain -p "$GE_KEYCHAIN_UNLOCK_PASSWORD" /Users/buildslave/Library/Keychains/buildslave.keychain'
+                                sh "yarn dist"
+                            }
+                        }
+
+                        // stage('Upload to NAS') {
+                        //     steps {
+                        //         sh 'mkdir -p "/nas/testing/Builds/bfa-loop-info/macOS/Build $BUILD_NUMBER"'
+                        //         sh 'cp -a dist/bfa-loop-info-*.dmg "/nas/testing/Builds/bfa-loop-info/macOS/Build $BUILD_NUMBER"'
+                        //     }
+                        // }
+
+                        stage('Upload to Dropbox') {
+                            steps {
+                                dropbox configName: 'bfa-builds', remoteDirectory: "Patch converter #${env.BUILD_NUMBER}", removePrefix: '', sourceFiles: 'dist/*.dmg'
+                            }
+                        }
+                    }
+                    post {
+                        success {
+                            script {
+                                slackSend (
+                                    channel: "#bfa-builds",
+                                    message: "*Patch converter macOS #${env.BUILD_NUMBER}* succeeded.",
+                                    attachments: """[
+                                        {
+                                            "text": "*Patch converter macOS #${env.BUILD_NUMBER}* succeeded.",
+                                            "fallback": "See changes here: https://gitlab.ujam.com/ujam/bfa-loop-info/compare/${env.GIT_PREVIOUS_SUCCESSFUL_COMMIT}...${env.GIT_COMMIT}?view=parallel",
+                                            "color": "good",
+                                            "fields": [
+                                                {
+                                                    "title": "Changes",
+                                                    "value": "${changes}",
+                                                    "short": false
+                                                }
+                                            ],
+                                            "actions": [
+                                                {
+                                                    "type": "button",
+                                                    "text": "Diff in GitLab",
+                                                    "url": "https://gitlab.ujam.com/ujam/bfa-loop-info/compare/${env.GIT_PREVIOUS_SUCCESSFUL_COMMIT}...${env.GIT_COMMIT}?view=parallel"
+                                                },
+                                                {
+                                                    "type": "button",
+                                                    "text": "Download from NAS",
+                                                    "url": "smb://192.168.119.10/testing/Builds/bfa-loop-info/macOS/${env.PRODUCT_VERSION}/Build%20${env.BUILD_NUMBER}"
+                                                },
+                                                {
+                                                    "type": "button",
+                                                    "text": "Download from Dropbox",
+                                                    "url": "https://www.dropbox.com/home/bfa-dev-builds/Patch%20Converter%20%23${env.BUILD_NUMBER}"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                    """
+                                )
+                            }
+                        }
+                        failure {
+                            script {
+                                slackSend (
+                                    channel: "#bfa-builds",
+                                    message: "*Patch converter macOS #${env.BUILD_NUMBER}* failed.",
+                                    attachments: """[
+                                        {
+                                            "text": "*Patch converter macOS #${env.BUILD_NUMBER}* failed.",
+                                            "fallback": "See changes here: https://gitlab.ujam.com/ujam/bfa-loop-info/compare/${env.GIT_PREVIOUS_SUCCESSFUL_COMMIT}...${env.GIT_COMMIT}?view=parallel",
+                                            "color": "danger",
+                                            "fields": [
+                                                {
+                                                    "title": "Changes",
+                                                    "value": "${changes}",
+                                                    "short": false
+                                                }
+                                            ],
+                                            "actions": [
+                                                {
+                                                    "type": "button",
+                                                    "text": "Diff in GitLab",
+                                                    "url": "https://gitlab.ujam.com/ujam/bfa-loop-info/compare/${env.GIT_PREVIOUS_SUCCESSFUL_COMMIT}...${env.GIT_COMMIT}?view=parallel"
+                                                },
+                                                {
+                                                    "type": "button",
+                                                    "text": "Jenkins log",
+                                                    "url": "https://ci.ujam.com/job/bfa-loop-info/${env.BUILD_NUMBER}/console#l10n-footer",
+                                                    "style": "danger"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                    """
+                                )
+                            }
+                        }
+                    }
+                }
+                stage('Windows') {
+                    agent {
+                        label 'Win 7 Build Slave (no iLok)'
+                    }
+                    stages {
+                        stage('Checkout') {
+                            steps {
+                                script {
+                                    final scmVars = checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'SubmoduleOption', disableSubmodules: false, recursiveSubmodules: true, reference: '', trackingSubmodules: false]], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'd98040c9-a183-420a-b354-60f7dc5efedd', url: 'git@gitlab.ujam.com:ujam/bfa-loop-info.git']]])
+                                    env.WIN_GIT_COMMIT = scmVars.GIT_COMMIT
+                                    env.WIN_GIT_PREVIOUS_SUCCESSFUL_COMMIT = scmVars.GIT_PREVIOUS_SUCCESSFUL_COMMIT ? scmVars.GIT_PREVIOUS_SUCCESSFUL_COMMIT : 'HEAD~1'
+                                    changesWin = bat(returnStdout: true, script: "@git log --pretty=format:\"%%ad %%s - %%an\" --date=format:\"%%Y-%%m-%%d %%H:%%M\" ${env.WIN_GIT_PREVIOUS_SUCCESSFUL_COMMIT}..HEAD").trim().replaceAll('\n', '\\\\n')
+                                }
+                            }
+                        }
+
+                        stage('Install dependencies') {
+                            steps {
+                                bat 'yarn'
+                            }
+                        }
+
+                        stage('Clean') {
+                            steps {
+                                bat 'if exist "dist" (rmdir /S /Q dist)'
+                            }
+                        }
+
+                        stage('Build') {
+                            steps {
+                                bat 'yarn build'
+                            }
+                        }
+
+                        stage('Create installer') {
+                            steps {
+                                withEnv(['CSC_LINK=C:\\codesign\\NXTGN_CodeSigning_NoPass.p12']) {
+                                    bat 'yarn dist'
+                                }
+                            }
+                        }
+
+                        // stage('Upload to NAS') {
+                        //     steps {
+                        //         bat 'mkdir "\\\\ujam\\Testing\\Builds\\bfa-loop-info\\windows\\Build %BUILD_NUMBER%"'
+                        //         bat 'copy "dist\\bfa-loop-info*.exe" "\\\\ujam\\testing\\Builds\\bfa-loop-info\\windows\\Build %BUILD_NUMBER%"'
+                        //     }
+                        // }
+                        stage('Upload to Dropbox') {
+                            steps {
+                                dropbox configName: 'bfa-builds', remoteDirectory: "Patch converter #${env.BUILD_NUMBER}", removePrefix: '', sourceFiles: 'dist/*.exe'
+                            }
+                        }
+                    }
+                    post {
+                        success {
+                            script {
+                                slackSend (
+                                    channel: "#bfa-builds",
+                                    message: "*Patch converter Windows #${env.BUILD_NUMBER}* succeeded.",
+                                    attachments: """[
+                                        {
+                                            "text": "*Patch converter Windows #${env.BUILD_NUMBER}* succeeded.",
+                                            "fallback": "See changes here: https://gitlab.ujam.com/ujam/bfa-loop-info/compare/${env.WIN_GIT_PREVIOUS_SUCCESSFUL_COMMIT}...${env.WIN_GIT_COMMIT}?view=parallel",
+                                            "color": "good",
+                                            "fields": [
+                                                {
+                                                    "title": "Changes",
+                                                    "value": "${changesWin}",
+                                                    "short": false
+                                                }
+                                            ],
+                                            "actions": [
+                                                {
+                                                    "type": "button",
+                                                    "text": "Diff in GitLab",
+                                                    "url": "https://gitlab.ujam.com/ujam/bfa-loop-info/compare/${env.WIN_GIT_PREVIOUS_SUCCESSFUL_COMMIT}...${env.WIN_GIT_COMMIT}?view=parallel"
+                                                },
+                                                {
+                                                    "type": "button",
+                                                    "text": "Download from NAS",
+                                                    "url": "smb://192.168.119.10/Testing/Builds/bfa-loop-info/windows/${env.PRODUCT_VERSION}/Build%20${env.BUILD_NUMBER}"
+                                                },
+                                                {
+                                                    "type": "button",
+                                                    "text": "Download from Dropbox",
+                                                    "url": "https://www.dropbox.com/home/bfa-dev-builds/Patch%20Converter%20%23${env.BUILD_NUMBER}"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                    """
+                                )
+                            }
+                        }
+                        failure {
+                            script {
+                                slackSend (
+                                    channel: "#bfa-builds",
+                                    message: "*Patch converter Windows #${env.BUILD_NUMBER}* failed.",
+                                    attachments: """[
+                                        {
+                                            "text": "*Patch converter Windows #${env.BUILD_NUMBER}* failed.",
+                                            "fallback": "See changes here: https://gitlab.ujam.com/ujam/bfa-loop-info/compare/${env.WIN_GIT_PREVIOUS_SUCCESSFUL_COMMIT}...${env.WIN_GIT_COMMIT}?view=parallel",
+                                            "color": "danger",
+                                            "fields": [
+                                                {
+                                                    "title": "Changes",
+                                                    "value": "${changes}",
+                                                    "short": false
+                                                }
+                                            ],
+                                            "actions": [
+                                                {
+                                                    "type": "button",
+                                                    "text": "Diff in GitLab",
+                                                    "url": "https://gitlab.ujam.com/ujam/bfa-loop-info/compare/${env.WIN_GIT_PREVIOUS_SUCCESSFUL_COMMIT}...${env.WIN_GIT_COMMIT}?view=parallel"
+                                                },
+                                                {
+                                                    "type": "button",
+                                                    "text": "Jenkins log",
+                                                    "url": "https://ci.ujam.com/job/bfa-loop-info/${env.BUILD_NUMBER}/console#l10n-footer",
+                                                    "style": "danger"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                    """
+                                )
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

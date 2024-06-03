@@ -1,0 +1,38 @@
+{
+    "Module": "Group",
+    "Active": "Off",
+    "Name": "Ch xy",
+    "Output": -1,
+    "De-glitch Start": "On",
+    "ModSources": [
+        {
+            "Module": "ModSourceCustom",
+            "Name": "Env",
+            "Curve": [ 3.0, 1.0, 2.0, 0.0, 0.25, 0.01, 1.0, 0.5, -5.0, 1.0, 0.5, -5.0, 1.0, 0.5, -5.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ]
+          }
+    ],
+    "ModRoutings": [
+        {
+            "Module": "ModRouting",
+            "Active": "Off",
+            "Depth": 0.525083,
+            "Dest": "Tune"
+          },
+          {
+            "Module": "ModRouting",
+            "Active": "Off",
+            "Depth": 0.525083,
+            "Dest": "Tune"
+          }
+    ],
+    "Filters": [
+        {
+            "Module": "FilterTimestretch",
+            "Tempo Track": "On",
+            "Formant Shift": 0.5,
+            "Formant Track": 100.0,
+            "Keytrack": "On"
+        }
+    ],
+    "Zones": []
+}
